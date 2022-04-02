@@ -1,2 +1,2 @@
 # Anonymous
-This repository is created for sharing the dataset related to our ICSE22 paper.
+This repository includes test projects of inter-procedural program synthesis tasks that aim to implement authentication security tactic using JAAS framework API.
