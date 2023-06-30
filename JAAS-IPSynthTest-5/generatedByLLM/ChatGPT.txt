@@ -1,0 +1,69 @@
+////////////////////////////////  Prompt //////////////////////////////////
+Can you synthesize code using JAAS API to implement authentication in the following code?
+
+public class Test5 {
+    boolean globalVarBool;
+    static String moduleName;
+
+    public void authenticate(){
+        LoginContext lc = initLC( moduleName );
+        login( lc );
+        inspectSubject( lc );
+    }
+
+    public LoginContext initLC( String name ){
+        return null;
+    }
+    public void login( LoginContext lc ){
+    }
+    public void inspectSubject( LoginContext lc ){
+    }
+
+    public static void main(String[] args) {
+        moduleName = "test1";
+        Test5 jaasUser = new IPSyntTest5();
+        jaasUser.authenticate();
+    }
+
+}
+
+////////////////////////////////  Answer //////////////////////////////////
+public class Test5 {
+    boolean globalVarBool;
+    static String moduleName;
+
+    public void authenticate() {
+        LoginContext lc = initLC(moduleName);
+        login(lc);
+        inspectSubject(lc);
+    }
+
+    public LoginContext initLC(String name) {
+        // Create a configuration file for JAAS
+        System.setProperty("java.security.auth.login.config", "jaas.config");
+
+        // Create a LoginContext with the specified name
+        LoginContext loginContext = new LoginContext(name);
+
+        return loginContext;
+    }
+
+    public void login(LoginContext lc) {
+        // Perform the login
+        try {
+            lc.login();
+        } catch (LoginException e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+        }
+    }
+
+    public void inspectSubject(LoginContext lc) {
+        // TODO: Implement the logic for inspecting the authenticated subject
+    }
+
+    public static void main(String[] args) {
+        moduleName = "test1";
+        Test5 jaasUser = new Test5();
+        jaasUser.authenticate();
+    }
+}

@@ -1,0 +1,94 @@
+////////////////////////////////  Prompt //////////////////////////////////
+Can you synthesize code using JAAS API to implement authentication in the following code?
+
+public class Test10 {
+
+    double d = 0.5;
+
+    public LoginContext initLC( String name ){
+        return null;
+    }
+    public void login( LoginContext lc ){
+    }
+    public void inspectSubject( LoginContext lc ){
+    }
+
+    public static void main(String[] args) {
+
+        Test10 jaasUser = new Test10();
+        jaasUser.performLoggingIn();
+    }
+    public void performLoggingIn(){
+        performInnerLoggingIn();
+    }
+    public void performInner2LoggingIn(){
+        String moduleName = getModuleName();
+        LoginContext lc = initLC( moduleName );
+        login( lc );
+        inspectSubject( lc );
+    }
+    public void performInnerLoggingIn(){
+        performInner2LoggingIn();
+    }
+    public static String getModuleName(){
+        return "test10";
+    }
+}
+
+
+
+////////////////////////////////  Answer //////////////////////////////////
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
+
+public class Test10 {
+
+    double d = 0.5;
+
+    public LoginContext initLC(String name) {
+        // Create a configuration file for JAAS
+        System.setProperty("java.security.auth.login.config", "jaas.config");
+
+        // Create a LoginContext with the specified name
+        LoginContext loginContext = new LoginContext(name);
+
+        return loginContext;
+    }
+
+    public void login(LoginContext lc) {
+        // Perform the login
+        try {
+            lc.login();
+        } catch (LoginException e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+        }
+    }
+
+    public void inspectSubject(LoginContext lc) {
+        // TODO: Implement the logic for inspecting the authenticated subject
+    }
+
+    public static void main(String[] args) {
+        Test10 jaasUser = new Test10();
+        jaasUser.performLoggingIn();
+    }
+
+    public void performLoggingIn() {
+        performInnerLoggingIn();
+    }
+
+    public void performInner2LoggingIn() {
+        String moduleName = getModuleName();
+        LoginContext lc = initLC(moduleName);
+        login(lc);
+        inspectSubject(lc);
+    }
+
+    public void performInnerLoggingIn() {
+        performInner2LoggingIn();
+    }
+
+    public static String getModuleName() {
+        return "test10";
+    }
+}

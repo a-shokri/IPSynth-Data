@@ -1,0 +1,90 @@
+////////////////////////////////  Prompt //////////////////////////////////
+Can you synthesize code using JAAS API to implement authentication in the following code?
+
+public class Test1 {
+    String notInitializedString;
+    public LoginContext initLC(String name)  throws LoginException{
+        return null;
+    }
+
+    public void login(LoginContext loginContext) throws LoginException{
+    }
+
+    public void inspectSubject( LoginContext loginContext ){
+    }
+
+    public static void main(String[] args)  throws LoginException{
+        String moduleName = args[0];
+        Test1 jaasImplementor = new Test1();
+        LoginContext loginContext = jaasImplementor.initLC( moduleName );
+        jaasImplementor.login(loginContext );
+        jaasImplementor.inspectSubject( loginContext );
+    }
+
+}
+
+
+////////////////////////////////  Answer //////////////////////////////////
+import javax.security.auth.callback.*;
+import javax.security.auth.login.*;
+import java.io.Console;
+import java.io.IOException;
+
+public class Test1 {
+    String notInitializedString;
+
+    public LoginContext initLC(String name) throws LoginException {
+        // Create a configuration file for JAAS
+        System.setProperty("java.security.auth.login.config", "jaas.config");
+
+        // Create a LoginContext with the specified name and a callback handler
+        LoginContext loginContext = new LoginContext(name, new SimpleCallbackHandler());
+
+        return loginContext;
+    }
+
+    public void login(LoginContext loginContext) throws LoginException {
+        // Perform the login
+        loginContext.login();
+    }
+
+    public void inspectSubject(LoginContext loginContext) {
+        // Access the authenticated subject
+        Subject subject = loginContext.getSubject();
+
+        // TODO: Implement the subject inspection logic
+        // You can access the subject's principals and perform necessary operations
+    }
+
+    public static void main(String[] args) throws LoginException {
+        String moduleName = args[0];
+        Test1 jaasImplementor = new Test1();
+        LoginContext loginContext = jaasImplementor.initLC(moduleName);
+        jaasImplementor.login(loginContext);
+        jaasImplementor.inspectSubject(loginContext);
+    }
+
+    // Simple implementation of CallbackHandler for testing purposes
+    private static class SimpleCallbackHandler implements CallbackHandler {
+        @Override
+        public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
+            for (Callback callback : callbacks) {
+                if (callback instanceof NameCallback) {
+                    // Provide the username
+                    NameCallback nameCallback = (NameCallback) callback;
+                    Console console = System.console();
+                    String username = console.readLine("Username: ");
+                    nameCallback.setName(username);
+                } else if (callback instanceof PasswordCallback) {
+                    // Provide the password
+                    PasswordCallback passwordCallback = (PasswordCallback) callback;
+                    Console console = System.console();
+                    char[] password = console.readPassword("Password: ");
+                    passwordCallback.setPassword(password);
+                } else {
+                    throw new UnsupportedCallbackException(callback, "Callback not supported");
+                }
+            }
+        }
+    }
+}

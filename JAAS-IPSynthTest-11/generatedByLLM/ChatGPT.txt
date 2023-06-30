@@ -1,0 +1,42 @@
+////////////////////////////////  Prompt //////////////////////////////////
+Can you synthesize code using JAAS API to implement authentication in the following code?
+
+public class Test11 {
+    String notInitializedString;
+
+    public static void main(String[] args)  throws LoginException{
+        String moduleName = args[0];
+        //TODO: To be synthesized
+        System.out.println( "After login process" );
+    }
+
+}
+
+
+
+
+////////////////////////////////  Answer //////////////////////////////////
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
+
+public class Test11 {
+    String notInitializedString;
+
+    public static void main(String[] args) throws LoginException {
+        String moduleName = args[0];
+        Test11 jaasUser = new Test11();
+        jaasUser.loginProcess(moduleName);
+        System.out.println("After login process");
+    }
+
+    public void loginProcess(String moduleName) throws LoginException {
+        // Create a configuration file for JAAS
+        System.setProperty("java.security.auth.login.config", "jaas.config");
+
+        // Create a LoginContext with the specified name
+        LoginContext loginContext = new LoginContext(moduleName);
+
+        // Perform the login
+        loginContext.login();
+    }
+}
