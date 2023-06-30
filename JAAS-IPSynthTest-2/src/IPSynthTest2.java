@@ -5,9 +5,7 @@ import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 
-/**
- * @author Ali Shokri (as8308@rit.edu)
- */
+
 // A test case for architectural tactic synthesis using JAAS framework
 public class IPSynthTest2 {
 
