@@ -1,2 +1,0 @@
-Preferred=Initialization:19@Login:22@SubjectInspection:25
-Correct=Initialization:16,17,18,19,28,29,30,31,33,34,35,36,37@Login:20,21,22,23,24,25,34,35,36,37@SubjectInspection:20,21,22,23,24,25,34,35,36,37
