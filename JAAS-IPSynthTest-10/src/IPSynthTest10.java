@@ -11,7 +11,7 @@ public class IPSynthTest10 {
 
     double d = 0.5;
 
-    public LoginContext initLC( String name ){
+    public LoginContext testName( String name ){
         //TODO: To be synthesized
         return null;
     }
@@ -32,7 +32,7 @@ public class IPSynthTest10 {
     }
     public void performInner2LoggingIn(){
         String moduleName = getModuleName();
-        LoginContext lc = initLC( moduleName );
+        LoginContext lc = testName( moduleName );
         login( lc );
         inspectSubject( lc );
     }
